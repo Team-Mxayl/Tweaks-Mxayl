@@ -87,7 +87,7 @@
                                                                                              [<ore:chest>,<ore:chest>,<ore:chest>]]);
 # RailCraft Modify
     # Var Space
-        var BlastFurnace = <Railcraft:machine.alpha:12>;
+        var RCBlastFurnace = <Railcraft:machine.alpha:12>;
     # Recipes
         recipes.remove(<Railcraft:machine.beta>);
         mods.railcraft.Rolling.addShaped(<Railcraft:machine.beta>, [[IronPlate, IronPlate, null], 
@@ -672,5 +672,5 @@
                                        [Stick,null,null]]);
         recipes.remove(AdvBlastFurnace);
         recipes.addShaped(AdvBlastFurnace,[[OreSteelPlate,OreSteelPlate,OreSteelPlate],
-                                           [null,BlastFurnace,null],
+                                           [null,RCBlastFurnace,null],
                                            [OreSteelPlate,OreSteelPlate,OreSteelPlate]]);
