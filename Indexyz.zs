@@ -15,20 +15,20 @@
     import mods.railcraft.BlastFurnace;
     import mods.projecte.PhiloStone;
     import mods.projecte.KleinStar;
-
-# Val Space
-    val IronPlate   = <Railcraft:part.plate>;
-    val SteelPlate  = <Railcraft:part.plate:1>;
-    val TinPlate    = <Railcraft:part.plate:2>;
-    val CopperPlate = <Railcraft:part.plate:3>;
-    val IronWrench  = <OpenBlocks:wrench>;
-    val SteelIngot  = <ore:ingotSteel>;
+# Var Space
+    var IronPlate     = <Railcraft:part.plate>;
+    var SteelPlate    = <Railcraft:part.plate:1>;
+    var TinPlate      = <Railcraft:part.plate:2>;
+    var CopperPlate   = <Railcraft:part.plate:3>;
+    var IronWrench    = <OpenBlocks:wrench>;
+    var SteelIngot    = <ore:ingotSteel>;
+    var OreSteelPlate = <ore:plateSteel>;
 # Add item that you want to remove here!
     var baneditems = 
     [
     # Because not IC2 support now!
     /*
-        <IC2:itemPartCircuit>,
+        <IC2:itemPartCircuit>,f
         <IC2:itemToolCutter>,
         <IC2:itemToolForgeHammer>,
         <IC2:blockMachine>,
@@ -45,7 +45,7 @@
         <Botania:pool:2>,
         <ImmersiveEngineering:stoneDecoration:1>,
         <ImmersiveEngineering:stoneDecoration:2>,
-     // <ImmersiveEngineering:stoneDecoration:6>
+     #  <ImmersiveEngineering:stoneDecoration:6>
     ] as IItemStack[];
     for i, item in baneditems 
     {
@@ -55,26 +55,28 @@
     }
 # Ore Dictionary
     <ore:slimeball>.addAll(<ore:itemRubber>);
-    <ore:plateIron>.add(IronPlate);
+    # For RC to support plate Ore Dictionary
+        <ore:plateIron>.add(IronPlate);
+        <ore:plateSteel>.add(SteelPlate);
 # Minecraft Modify
-    # Val Space
-        val Redstone    = <ore:dustRedstone>;
-        val BlockIron   = <minecraft:iron_block>;
-        val Sand        = <ore:sand>;
-        val Glass       = <ore:blockGlass>;
-        val RedStone    = <ore:dustRedstone>;
-        val Stick       = <ore:stickWood>;
-        val IronIngot   = <ore:ingotIron>;
+    # Var Space
+        var Redstone    = <ore:dustRedstone>;
+        var BlockIron   = <minecraft:iron_block>;
+        var Sand        = <ore:sand>;
+        var Glass       = <ore:blockGlass>;
+        var RedStone    = <ore:dustRedstone>;
+        var Stick       = <ore:stickWood>;
+        var IronIngot   = <ore:ingotIron>;
     # Furnace Recipes
         furnace.remove(Glass);
         PhiloStone.removePhiloSmelting(<minecraft:glass>);
         mods.railcraft.BlastFurnace.addRecipe(<minecraft:sand>,true,false,5,<minecraft:glass>);
         Crucible.addRecipe("ASPECTS",<minecraft:glass>,<minecraft:sand>,"terra 1");
-        # Crafting Fix
-         recipes.remove(IronWrench);
+    # Crafting Fix
+        recipes.remove(IronWrench);
         recipes.addShaped(IronWrench,[[null,IronIngot,IronIngot],
-                                        [IronIngot,IronIngot,IronIngot],
-                                        [IronIngot,IronIngot,null]]);
+                                      [IronIngot,IronIngot,IronIngot],
+                                      [IronIngot,IronIngot,null]]);
 # StorageSilo Modify
     recipes.remove(<storageSilo:storagesilo>);
     recipes.addShaped(<storageSilo:storagesilo>,[[<ore:chest>,<ore:chest>,<ore:chest>],
@@ -84,35 +86,31 @@
                                                                                               [<ore:chest>,null,<ore:chest>],
                                                                                              [<ore:chest>,<ore:chest>,<ore:chest>]]);
 # RailCraft Modify
-/*
-    recipes.remove(<Railcraft:machine.alpha:12>);
-    recipes.addShaped(<Railcraft:machine.alpha:12> * 8,[[<ore:soulSand>,IronWrench,<ore:soulSand>],
-                                                        [IronWrench,<minecraft:magma_cream>,IronWrench],
-                                                        [<ore:soulSand>,IronWrench,<ore:soulSand>]]);
-*/
-
-    recipes.remove(<Railcraft:machine.beta>);
-    mods.railcraft.Rolling.addShaped(<Railcraft:machine.beta>, [[IronPlate, IronPlate, null], 
-                                                                [IronPlate, IronPlate, null],
-                                                                [null, null, null]]);
-    recipes.remove(<Railcraft:machine.beta:13>);
-    mods.railcraft.Rolling.addShaped(<Railcraft:machine.beta:13>, [[SteelPlate, SteelPlate, null], 
-                                                                   [SteelPlate, SteelPlate, null],
-                                                                   [null, null, null]]);
+    # Var Space
+        var BlastFurnace = <Railcraft:machine.alpha:12>;
+    # Recipes
+        recipes.remove(<Railcraft:machine.beta>);
+        mods.railcraft.Rolling.addShaped(<Railcraft:machine.beta>, [[IronPlate, IronPlate, null], 
+                                                                    [IronPlate, IronPlate, null],
+                                                                    [null, null, null]]);
+        recipes.remove(<Railcraft:machine.beta:13>);
+        mods.railcraft.Rolling.addShaped(<Railcraft:machine.beta:13>, [[SteelPlate, SteelPlate, null], 
+                                                                       [SteelPlate, SteelPlate, null],
+                                                                       [null, null, null]]);
 # MagnetiCraft Modify
-    # Val Space
-        val CopperCable       = <Magneticraft:item.cable_low>;
-        val CopperCableNormal = <Magneticraft:item.cable_medium>;
-        val CopperCableHigh   = <Magneticraft:item.cable_high>;
-        val CopperCoil        = <Magneticraft:item.heavy_copper_coil>;
-        val CopperWire        = <Magneticraft:item.copper_wire>;
-        val CopperHeatCoil    = <Magneticraft:item.heatcoil_copper>;
-        val IronHeatCoil      = <Magneticraft:item.heatcoil_iron>;
-        val WHeatCoil         = <Magneticraft:item.heatcoil_tungsten>;
-        val Diode             = <Magneticraft:diode>;
-        val MachineBlock      = <Magneticraft:machine_housing>;
-        val EnergyIO          = <Magneticraft:MB_EnergyIO>;
-        val Chasis            = <Magneticraft:chasis>;
+    # Var Space
+        var CopperCable       = <Magneticraft:item.cable_low>;
+        var CopperCableNormal = <Magneticraft:item.cable_medium>;
+        var CopperCableHigh   = <Magneticraft:item.cable_high>;
+        var CopperCoil        = <Magneticraft:item.heavy_copper_coil>;
+        var CopperWire        = <Magneticraft:item.copper_wire>;
+        var CopperHeatCoil    = <Magneticraft:item.heatcoil_copper>;
+        var IronHeatCoil      = <Magneticraft:item.fheatcoil_iron>;
+        var WHeatCoil         = <Magneticraft:item.heatcoil_tungsten>;
+        var Diode             = <Magneticraft:diode>;
+        var MachineBlock      = <Magneticraft:machine_housing>;
+        var EnergyIO          = <Magneticraft:MB_EnergyIO>;
+        var Chasis            = <Magneticraft:chasis>;
     # Normal Machine Recipes
         recipes.remove(<Magneticraft:firebox>);
         recipes.addShaped(<Magneticraft:firebox>,[[<Railcraft:part.plate:3>,<Magneticraft:item.heat_cable>,<Railcraft:part.plate:3>],
@@ -145,20 +143,19 @@
         recipes.addShaped(EnergyIO,[[CopperWire,CopperWire,CopperWire],
                                     [CopperWire,Chasis,CopperWire],
                                     [CopperWire,CopperWire,CopperWire]]);
-        
 # RotaryCraft Modify
-    # Val Space
-         val CraftingTable   = <RotaryCraft:rotarycraft_item_machine:75>;
-         val RoCBlastFurnace = <RotaryCraft:rotarycraft_item_machine:45>;
-         val HASAAxis        = <RotaryCraft:rotarycraft_item_shaftcraft:2>;
-         val HASAGear        = <RotaryCraft:rotarycraft_item_shaftcraft:4>;
-         val IngotBedRock    = <ore:RotaryCraft:ingotBedrock>;
-         val HSLAIngot       = <ore:ingotHSLA>;
-         val HSLAIngot_NOD   = <RotaryCraft:rotarycraft_item_shaftcraft:1>;
-         val RoCScreen       = <RotaryCraft:rotarycraft_item_borecraft:5>;
-         val RoCChip         = <RotaryCraft:rotarycraft_item_borecraft:4>;
-         val RoCPowerModel   = <RotaryCraft:rotarycraft_item_misccraft:2>;
-         val RoCHotItem      = <RotaryCraft:rotarycraft_item_misccraft:2>;
+    # Var Space
+         var CraftingTable   = <RotaryCraft:rotarycraft_item_machine:75>;
+         var RoCBlastFurnace = <RotaryCraft:rotarycraft_item_machine:45>;
+         var HASAAxis        = <RotaryCraft:rotarycraft_item_shaftcraft:2>;
+         var HASAGear        = <RotaryCraft:rotarycraft_item_shaftcraft:4>;
+         var IngotBedRock    = <ore:RotaryCraft:ingotBedrock>;
+         var HSLAIngot       = <ore:ingotHSLA>;
+         var HSLAIngot_NOD   = <RotaryCraft:rotarycraft_item_shaftcraft:1>;
+         var RoCScreen       = <RotaryCraft:rotarycraft_item_borecraft:5>;
+         var RoCChip         = <RotaryCraft:rotarycraft_item_borecraft:4>;
+         var RoCPowerModel   = <RotaryCraft:rotarycraft_item_misccraft:2>;
+         var RoCHotItem      = <RotaryCraft:rotarycraft_item_misccraft:2>;
     # Machine Recipes
         recipes.remove(CraftingTable);
         recipes.addShaped(CraftingTable,[[null,IronWrench,null],
@@ -175,34 +172,34 @@
 		Rolling.addShaped(<Railcraft:firestone.cut>,[[<Railcraft:firestone.cracked:*>]]);
 		BlastFurnace.addRecipe(<Railcraft:firestone.cut>, false, false, 1280, <Railcraft:firestone.refined:4999>);
 # AE2 Modify
-    # Val Space
-        val CertusQCrystal     = <ore:crystalCertusQuartz>;
-        val FluixCrystal       = <ore:crystalFluix>;
-        val EndQCrystal        = <ore:gemQuartz>;
-        val Silicon            = <ore:itemSilicon>;
+    # Var Space
+        var CertusQCrystal     = <ore:crystalCertusQuartz>;
+        var FluixCrystal       = <ore:crystalFluix>;
+        var EndQCrystal        = <ore:gemQuartz>;
+        var Silicon            = <ore:itemSilicon>;
 
-        val PureCertusQCrystal = <appliedenergistics2:item.ItemMultiMaterial:10>;
-        val PureFluixCrystal   = <appliedenergistics2:item.ItemMultiMaterial:12>;
-        val PureEndQCrystal    = <appliedenergistics2:item.ItemMultiMaterial:11>;
-        val CertusQuartzSeed   = <appliedenergistics2:item.ItemCrystalSeed>;
-        val NetherQuartzSeed   = <appliedenergistics2:item.ItemCrystalSeed:600>;
-        val FluixSeed          = <appliedenergistics2:item.ItemCrystalSeed:1200>;
-        val FluixGlassCable    = <appliedenergistics2:item.ItemMultiPart:16>;
+        var PureCertusQCrystal = <appliedenergistics2:item.ItemMultiMaterial:10>;
+        var PureFluixCrystal   = <appliedenergistics2:item.ItemMultiMaterial:12>;
+        var PureEndQCrystal    = <appliedenergistics2:item.ItemMultiMaterial:11>;
+        var CertusQuartzSeed   = <appliedenergistics2:item.ItemCrystalSeed>;
+        var NetherQuartzSeed   = <appliedenergistics2:item.ItemCrystalSeed:600>;
+        var FluixSeed          = <appliedenergistics2:item.ItemCrystalSeed:1200>;
+        var FluixGlassCable    = <appliedenergistics2:item.ItemMultiPart:16>;
 
-        val Inscriber          = <appliedenergistics2:tile.BlockInscriber>;
-        val CraftingUnit       = <appliedenergistics2:tile.BlockCraftingUnit>;
-        val FormationCore      = <appliedenergistics2:item.ItemMultiMaterial:43>;
-        val AnnihilationCore   = <appliedenergistics2:item.ItemMultiMaterial:44>;
-        val AEInterface        = <appliedenergistics2:tile.BlockInterface>;
-        val GoldCircuit        = <appliedenergistics2:item.ItemMultiMaterial:22>;
-        val CertusCircuit      = <appliedenergistics2:item.ItemMultiMaterial:23>;
-        val DiamondCircuit     = <appliedenergistics2:item.ItemMultiMaterial:24>;
-        val SiliconPCB         = <appliedenergistics2:item.ItemMultiMaterial:20>;
+        var Inscriber          = <appliedenergistics2:tile.BlockInscriber>;
+        var CraftingUnit       = <appliedenergistics2:tile.BlockCraftingUnit>;
+        var FormationCore      = <appliedenergistics2:item.ItemMultiMaterial:43>;
+        var AnnihilationCore   = <appliedenergistics2:item.ItemMultiMaterial:44>;
+        var AEInterface        = <appliedenergistics2:tile.BlockInterface>;
+        var GoldCircuit        = <appliedenergistics2:item.ItemMultiMaterial:22>;
+        var CertusCircuit      = <appliedenergistics2:item.ItemMultiMaterial:23>;
+        var DiamondCircuit     = <appliedenergistics2:item.ItemMultiMaterial:24>;
+        var SiliconPCB         = <appliedenergistics2:item.ItemMultiMaterial:20>;
 
-        val Storage1K          = <appliedenergistics2:item.ItemBasicStorageCell.1k>;
-        val Storage4K          = <appliedenergistics2:item.ItemBasicStorageCell.4k>;
-        val Storage16K         = <appliedenergistics2:item.ItemBasicStorageCell.16k>;
-        val Storage64K         = <appliedenergistics2:item.ItemBasicStorageCell.64k>;
+        var Storage1K          = <appliedenergistics2:item.ItemBasicStorageCell.1k>;
+        var Storage4K          = <appliedenergistics2:item.ItemBasicStorageCell.4k>;
+        var Storage16K         = <appliedenergistics2:item.ItemBasicStorageCell.16k>;
+        var Storage64K         = <appliedenergistics2:item.ItemBasicStorageCell.64k>;
      # Pure Crystal
         # RaliCraft Blast Furnace
         mods.railcraft.BlastFurnace.addRecipe(CertusQuartzSeed, true, false, 130, PureCertusQCrystal);
@@ -238,14 +235,14 @@
                                          [CopperCoil,AEInterface,CopperCoil],
                                          [CertusCircuit,FluixGlassCable,GoldCircuit]]);
 # Adv Generators Modify
-    # Val Space
-        val IronFrame          = <advgenerators:IronFrame>;
-        val IronBlade          = <advgenerators:TurbineBladeIron>;
-        val SteelBlade         = <advgenerators:TurbineBladeSteel>;
-        val IronTubing         = <advgenerators:IronTubing>;
-        val RedstoneIronWiring = <advgenerators:IronWiring>;
-        val Controller         = <advgenerators:Controller>;
-        val PressureValve      = <advgenerators:PressureValve>;
+    # Var Space
+        var IronFrame          = <advgenerators:IronFrame>;
+        var IronBlade          = <advgenerators:TurbineBladeIron>;
+        var SteelBlade         = <advgenerators:TurbineBladeSteel>;
+        var IronTubing         = <advgenerators:IronTubing>;
+        var RedstoneIronWiring = <advgenerators:IronWiring>;
+        var Controller         = <advgenerators:Controller>;
+        var Pressurevarve      = <advgenerators:Pressurevarve>;
     # Item Recipes
         recipes.remove(IronFrame);
         recipes.addShaped(IronFrame,[[null,IronPlate,null],
@@ -267,8 +264,8 @@
         recipes.addShaped(RedstoneIronWiring * 8,[[IronPlate,Redstone,IronPlate],
                                                   [Redstone,IronWrench,Redstone],
                                                   [IronPlate,Redstone,IronPlate]]);
-        recipes.remove(PressureValve);
-        recipes.addShaped(PressureValve,[[null,IronPlate,null],
+        recipes.remove(Pressurevarve);
+        recipes.addShaped(Pressurevarve,[[null,IronPlate,null],
                                          [IronTubing,IronTubing,IronTubing],
                                          [null,IronPlate,null]]);
         recipes.remove(IronBlade);
@@ -276,10 +273,10 @@
                                      [null,IronPlate,IronPlate],
                                      [null,null,IronPlate]]);
 # Oepn Computer Modify
-    # Val Space
-        val UnWorkPCB  = <OpenComputers:item:30>;
-        val Disk       = <OpenComputers:item:19>;
-        val Transistor = <OpenComputers:item:23>;
+    # Var Space
+        var UnWorkPCB  = <OpenComputers:item:30>;
+        var Disk       = <OpenComputers:item:19>;
+        var Transistor = <OpenComputers:item:23>;
     # Item Recipes
         recipes.remove(UnWorkPCB);
         recipes.addShaped(UnWorkPCB,[[null,SiliconPCB,null],
@@ -292,32 +289,32 @@
         recipes.remove(Transistor);
         recipes.addShapeless(Transistor,[IronPlate,GoldCircuit]);
 # Bot Modify
-    # Val Recipes
-        val Altar                  = <Botania:altar>;
-        val MagicPool              = <Botania:pool>;
-        val LiveRock               = <Botania:livingrock>;
+    # var Recipes
+        var Altar                  = <Botania:altar>;
+        var MagicPool              = <Botania:pool>;
+        var LiveRock               = <Botania:livingrock>;
 
-        val GaiaIngot              = <ore:gaiaIngot>;
-        val ElvenIngot             = <ore:ingotElvenElementium>;
-        val ManaIngot              = <ore:ore:ingotManasteel>;
-        val TerraIngot             = <ore:ingotTerrasteel>;
+        var GaiaIngot              = <ore:gaiaIngot>;
+        var ElvenIngot             = <ore:ingotElvenElementium>;
+        var ManaIngot              = <ore:ore:ingotManasteel>;
+        var TerraIngot             = <ore:ingotTerrasteel>;
 
-        val WhiteMysticalPetal     = <Botania:petal>;
-        val OrangeMysticalPetal    = <Botania:petal:1>;
-        val MagentaMysticalPetal   = <Botania:petal:2>;
-        val LightBlueMysticalPetal = <Botania:petal:3>;
-        val YellowMysticalPetal    = <Botania:petal:4>;
-        val LimeMysticalPetal      = <Botania:petal:5>;
-        val PinkMysticalPetal      = <Botania:petal:6>;
-        val GrayMysticalPetal      = <Botania:petal:7>;
-        val LightGrayMysticalPetal = <Botania:petal:8>;
-        val CyanMysticalPetal      = <Botania:petal:9>;
-        val PurpleMysticalPetal    = <Botania:petal:10>;
-        val BlueMysticalPetal      = <Botania:petal:11>;
-        val BrownMysticalPetal     = <Botania:petal:12>;
-        val GreenMysticalPetal     = <Botania:petal:13>;
-        val RedMysticalPetal       = <Botania:petal:14>;
-        val BlackMysticalPetal     = <Botania:petal:15>;
+        var WhiteMysticalPetal     = <Botania:petal>;
+        var OrangeMysticalPetal    = <Botania:petal:1>;
+        var MagentaMysticalPetal   = <Botania:petal:2>;
+        var LightBlueMysticalPetal = <Botania:petal:3>;
+        var YellowMysticalPetal    = <Botania:petal:4>;
+        var LimeMysticalPetal      = <Botania:petal:5>;
+        var PinkMysticalPetal      = <Botania:petal:6>;
+        var GrayMysticalPetal      = <Botania:petal:7>;
+        var LightGrayMysticalPetal = <Botania:petal:8>;
+        var CyanMysticalPetal      = <Botania:petal:9>;
+        var PurpleMysticalPetal    = <Botania:petal:10>;
+        var BlueMysticalPetal      = <Botania:petal:11>;
+        var BrownMysticalPetal     = <Botania:petal:12>;
+        var GreenMysticalPetal     = <Botania:petal:13>;
+        var RedMysticalPetal       = <Botania:petal:14>;
+        var BlackMysticalPetal     = <Botania:petal:15>;
         
         # Items
             var MysticalPetal = 
@@ -354,10 +351,10 @@
         recipes.remove(MagicPool);
         Infusion.addRecipe("ASPECTS", LiveRock                     , PoolCraftList, "victus 64, potentia 64", MagicPool, 5);
 # BuildCraft Modify
-    # Val Space
-        val TankBlock = <BuildCraft|Factory:tankBlock>;
+    # Var Space
+        var TankBlock = <BuildCraft|Factory:tankBlock>;
 # EnderStorge Modify
-    # Val Space
+    # Var Space
         # Wools
             var WoolWhite           = <minecraft:wool:0>;
             var WoolOrange          = <minecraft:wool:1>;
@@ -540,13 +537,13 @@
                                               [ElvenIngot,<ore:pearlEnderEye>,ElvenIngot]]);
         }
 # Blod Magic Modify
-    # Val Space
-        val BM_Altar         = <AWWayofTime:Altar>;
-        val SacrificialKnife = <AWWayofTime:sacrificialKnife>;
-        val OutRouting       = <AWWayofTime:outputRoutingFocus>;
-        val InputRouting     = <AWWayofTime:inputRoutingFocus>;
-        val MagicDust        = <AWWayofTime:magicales>;
-        val LifeHolder       = <AWWayofTime:bloodMagicBaseItems:31>;
+    # Var Space
+        var BM_Altar         = <AWWayofTime:Altar>;
+        var SacrificialKnife = <AWWayofTime:sacrificialKnife>;
+        var OutRouting       = <AWWayofTime:outputRoutingFocus>;
+        var InputRouting     = <AWWayofTime:inputRoutingFocus>;
+        var MagicDust        = <AWWayofTime:magicales>;
+        var LifeHolder       = <AWWayofTime:bloodMagicBaseItems:31>;
     # Item Modify
     /*
         recipes.remove(BM_Altar);
@@ -558,19 +555,19 @@
                                             [null,TerraIngot,<ore:blockGlass>],
                                             [TerraIngot,null,<ore:blockGlass>]]);
 # Project E Modify
-    # Val Space
-        val PhiloStone           = <ProjectE:item.pe_philosophers_stone>;
-        val IronRing             = <ProjectE:item.pe_ring_iron_band>;
+    # Var Space
+        var PhiloStone           = <ProjectE:item.pe_philosophers_stone>;
+        var IronRing             = <ProjectE:item.pe_ring_iron_band>;
 
-        val LowConvalenceDust    = <ProjectE:item.pe_covalence_dust>;
-        val NormalConvalenceDust = <ProjectE:item.pe_covalence_dust:1>;
-        val HighConvalenceDust   = <ProjectE:item.pe_covalence_dust:2>;
+        var LowConvarenceDust    = <ProjectE:item.pe_covarence_dust>;
+        var NormalConvarenceDust = <ProjectE:item.pe_covarence_dust:1>;
+        var HighConvarenceDust   = <ProjectE:item.pe_covarence_dust:2>;
     # Item Modify
         recipes.remove(PhiloStone);
         recipes.remove(IronRing);
-        recipes.remove(LowConvalenceDust);
-        recipes.remove(NormalConvalenceDust);
-        recipes.remove(HighConvalenceDust);
+        recipes.remove(LowConvarenceDust);
+        recipes.remove(NormalConvarenceDust);
+        recipes.remove(HighConvarenceDust);
         # Magic Recipes
             recipes.addShaped(PhiloStone,[[<ore:ingotIron>,<ore:ingotIron>,<ore:ingotIron>],
                                           [OutRouting,<AWWayofTime:voidSigil>,InputRouting],
@@ -578,13 +575,13 @@
             recipes.addShaped(IronRing,[[TerraIngot,TerraIngot,TerraIngot],
                                         [TerraIngot,null,TerraIngot],
                                         [TerraIngot,TerraIngot,TerraIngot]]);
-            Crucible.addRecipe("ASPECTS",LowConvalenceDust,MagicDust,"metallum 1,permutatio 1");
-            recipes.addShaped(NormalConvalenceDust,[[LowConvalenceDust,LowConvalenceDust,LowConvalenceDust],
-                                                    [LowConvalenceDust,LifeHolder,LowConvalenceDust],
-                                                    [LowConvalenceDust,LowConvalenceDust,LowConvalenceDust]]);
-            recipes.addShaped(HighConvalenceDust,[[NormalConvalenceDust,NormalConvalenceDust,NormalConvalenceDust],
-                                                  [NormalConvalenceDust,<AWWayofTime:energyBazooka>,NormalConvalenceDust],
-                                                  [NormalConvalenceDust,NormalConvalenceDust,NormalConvalenceDust]]);
+            Crucible.addRecipe("ASPECTS",LowConvarenceDust,MagicDust,"metallum 1,permutatio 1");
+            recipes.addShaped(NormalConvarenceDust,[[LowConvarenceDust,LowConvarenceDust,LowConvarenceDust],
+                                                    [LowConvarenceDust,LifeHolder,LowConvarenceDust],
+                                                    [LowConvarenceDust,LowConvarenceDust,LowConvarenceDust]]);
+            recipes.addShaped(HighConvarenceDust,[[NormalConvarenceDust,NormalConvarenceDust,NormalConvarenceDust],
+                                                  [NormalConvarenceDust,<AWWayofTime:energyBazooka>,NormalConvarenceDust],
+                                                  [NormalConvarenceDust,NormalConvarenceDust,NormalConvarenceDust]]);
         # Tech Recipes
             recipes.addShaped(PhiloStone,[[IngotBedRock,RoCScreen,IngotBedRock],
                                           [IngotBedRock,RoCChip,IngotBedRock],
@@ -592,21 +589,21 @@
             recipes.addShaped(IronRing,[[IngotBedRock,IngotBedRock,IngotBedRock],
                                         [IngotBedRock,null,IngotBedRock],
                                         [IngotBedRock,IngotBedRock,IngotBedRock]]);
-            RockCrusher.addRecipe(HSLAIngot_NOD,false,false,[LowConvalenceDust],[1.0]);
-            recipes.addShaped(NormalConvalenceDust,[[LowConvalenceDust,LowConvalenceDust,LowConvalenceDust],
-                                                    [LowConvalenceDust,IngotBedRock,LowConvalenceDust],
-                                                    [LowConvalenceDust,LowConvalenceDust,LowConvalenceDust]]);
-            recipes.addShaped(HighConvalenceDust,[[NormalConvalenceDust,NormalConvalenceDust,NormalConvalenceDust],
-                                                  [NormalConvalenceDust,RoCHotItem,NormalConvalenceDust],
-                                                  [NormalConvalenceDust,NormalConvalenceDust,NormalConvalenceDust]]);
+            RockCrusher.addRecipe(HSLAIngot_NOD,false,false,[LowConvarenceDust],[1.0]);
+            recipes.addShaped(NormalConvarenceDust,[[LowConvarenceDust,LowConvarenceDust,LowConvarenceDust],
+                                                    [LowConvarenceDust,IngotBedRock,LowConvarenceDust],
+                                                    [LowConvarenceDust,LowConvarenceDust,LowConvarenceDust]]);
+            recipes.addShaped(HighConvarenceDust,[[NormalConvarenceDust,NormalConvarenceDust,NormalConvarenceDust],
+                                                  [NormalConvarenceDust,RoCHotItem,NormalConvarenceDust],
+                                                  [NormalConvarenceDust,NormalConvarenceDust,NormalConvarenceDust]]);
 # Matter Overdrive Modify
-    # Val Space
-        val TritaniumPlate = <mo:tritanium_plate>;
-        val TritaniumIngot = <mo:tritanium_ingot>;
-        val CircuitMK1     = <mo:isolinear_circuit>;
-        val Battery        = <mo:battery>;
-        val Dilithium      = <ore:gemDilithium>;
-        val Magnet         = <mo:s_magnet>;
+    # Var Space
+        var TritaniumPlate = <mo:tritanium_plate>;
+        var TritaniumIngot = <mo:tritanium_ingot>;
+        var CircuitMK1     = <mo:isolinear_circuit>;
+        var Battery        = <mo:battery>;
+        var Dilithium      = <ore:gemDilithium>;
+        var Magnet         = <mo:s_magnet>;
     # Item Modify
         recipes.remove(TritaniumPlate);
         Rolling.addShaped(TritaniumPlate * 4, [[TritaniumIngot, TritaniumIngot, null], 
@@ -635,16 +632,24 @@
                                               [null,Stick,null],
                                               [null,Stick,null]]);
 # IE Modify
-    # Val Space
-        val SteelComponent = <ImmersiveEngineering:material:12>;
-        val LowCoil        = <ImmersiveEngineering:coil>;
-        val NormalCoil     = <ImmersiveEngineering:coil:1>;
-        val HighCoil       = <ImmersiveEngineering:coil:2>;
-        val RadiatorBlock  = <ImmersiveEngineering:metalDecoration:4>;
-        val HeavyBlock     = <ImmersiveEngineering:metalDecoration:5>;
-        val GeneratorBlock = <ImmersiveEngineering:metalDecoration:6>;
-        val LightBlock     = <ImmersiveEngineering:metalDecoration:7>;
+    # Var Space
+        var SteelComponent  = <ImmersiveEngineering:material:12>;
+        var LowCoil         = <ImmersiveEngineering:coil>;
+        var NormalCoil      = <ImmersiveEngineering:coil:1>;
+        var HighCoil        = <ImmersiveEngineering:coil:2>;
+        var RadiatorBlock   = <ImmersiveEngineering:metalDecoration:4>;
+        var HeavyBlock      = <ImmersiveEngineering:metalDecoration:5>;
+        var GeneratorBlock  = <ImmersiveEngineering:metalDecoration:6>;
+        var LightBlock      = <ImmersiveEngineering:metalDecoration:7>;
+        var AdvBlastFurnace = <ImmersiveEngineering:stoneDecoration:6>;
+        var EnginerTool     = <ImmersiveEngineering:tool>;
     # Item Recipes
+        # Stop Tool to craft plate
+            recipes.remove(<ImmersiveEngineering:metal:38>);
+            recipes.remove(<ImmersiveEngineering:metal:30>);
+            recipes.remove(<ImmersiveEngineering:metal:36>);
+            recipes.remove(<ImmersiveEngineering:metal:33>);
+            recipes.remove(<ImmersiveEngineering:metal:32>);  
         recipes.remove(SteelComponent);
         recipes.addShaped(SteelComponent,[[SteelIngot,null,SteelIngot],
                                           [null,TritaniumPlate,null],
@@ -661,4 +666,11 @@
         recipes.addShaped(HighCoil,[[null,CopperCableHigh,null],
                                     [CopperCableHigh,Stick,CopperCableHigh],
                                     [null,CopperCableHigh,null]]);
-
+        recipes.remove(EnginerTool);
+        recipes.addShaped(EnginerTool,[[null,OreSteelPlate,null],
+                                       [null,Stick,OreSteelPlate],
+                                       [Stick,null,null]);
+        recipes.remove(AdvBlastFurnace);
+        recipes.addShaped(AdvBlastFurnace,[[OreSteelPlate,OreSteelPlate,OreSteelPlate],
+                                           [null,BlastFurnace,null],
+                                           [OreSteelPlate,OreSteelPlate,OreSteelPlate]);
