@@ -105,7 +105,7 @@
         var CopperCoil        = <Magneticraft:item.heavy_copper_coil>;
         var CopperWire        = <Magneticraft:item.copper_wire>;
         var CopperHeatCoil    = <Magneticraft:item.heatcoil_copper>;
-        var IronHeatCoil      = <Magneticraft:item.fheatcoil_iron>;
+        var IronHeatCoil      = <Magneticraft:item.heatcoil_iron>;
         var WHeatCoil         = <Magneticraft:item.heatcoil_tungsten>;
         var Diode             = <Magneticraft:diode>;
         var MachineBlock      = <Magneticraft:machine_housing>;
@@ -166,11 +166,11 @@
                                            [Diode,<minecraft:furnace>,Diode],
                                            [<Magneticraft:heat_resistance>,<Magneticraft:heat_resistance>,<Magneticraft:heat_resistance>]]);
     # Item Recipes
-    	recipes.remove(<Railcraft:firestone.cut>);
-		recipes.remove(<Railcraft:firestone.refined:4999>);
-		Rolling.addShaped(<Railcraft:firestone.cut>,[[<Railcraft:firestone.raw>]]);
-		Rolling.addShaped(<Railcraft:firestone.cut>,[[<Railcraft:firestone.cracked:*>]]);
-		BlastFurnace.addRecipe(<Railcraft:firestone.cut>, false, false, 1280, <Railcraft:firestone.refined:4999>);
+      recipes.remove(<Railcraft:firestone.cut>);
+    recipes.remove(<Railcraft:firestone.refined:4999>);
+    Rolling.addShaped(<Railcraft:firestone.cut>,[[<Railcraft:firestone.raw>]]);
+    Rolling.addShaped(<Railcraft:firestone.cut>,[[<Railcraft:firestone.cracked:*>]]);
+    BlastFurnace.addRecipe(<Railcraft:firestone.cut>, false, false, 1280, <Railcraft:firestone.refined:4999>);
 # AE2 Modify
     # Var Space
         var CertusQCrystal     = <ore:crystalCertusQuartz>;
@@ -242,7 +242,7 @@
         var IronTubing         = <advgenerators:IronTubing>;
         var RedstoneIronWiring = <advgenerators:IronWiring>;
         var Controller         = <advgenerators:Controller>;
-        var Pressurevarve      = <advgenerators:Pressurevarve>;
+        var PressureValve      = <advgenerators:PressureValve>;
     # Item Recipes
         recipes.remove(IronFrame);
         recipes.addShaped(IronFrame,[[null,IronPlate,null],
@@ -264,8 +264,8 @@
         recipes.addShaped(RedstoneIronWiring * 8,[[IronPlate,Redstone,IronPlate],
                                                   [Redstone,IronWrench,Redstone],
                                                   [IronPlate,Redstone,IronPlate]]);
-        recipes.remove(Pressurevarve);
-        recipes.addShaped(Pressurevarve,[[null,IronPlate,null],
+        recipes.remove(PressureValve);
+        recipes.addShaped(PressureValve,[[null,IronPlate,null],
                                          [IronTubing,IronTubing,IronTubing],
                                          [null,IronPlate,null]]);
         recipes.remove(IronBlade);
@@ -559,9 +559,9 @@
         var PhiloStone           = <ProjectE:item.pe_philosophers_stone>;
         var IronRing             = <ProjectE:item.pe_ring_iron_band>;
 
-        var LowConvarenceDust    = <ProjectE:item.pe_covarence_dust>;
-        var NormalConvarenceDust = <ProjectE:item.pe_covarence_dust:1>;
-        var HighConvarenceDust   = <ProjectE:item.pe_covarence_dust:2>;
+        var LowConvarenceDust    = <ProjectE:item.pe_covalence_dust>;
+        var NormalConvarenceDust = <ProjectE:item.pe_covalence_dust:1>;
+        var HighConvarenceDust   = <ProjectE:item.pe_covalence_dust:2>;
     # Item Modify
         recipes.remove(PhiloStone);
         recipes.remove(IronRing);
@@ -669,8 +669,8 @@
         recipes.remove(EnginerTool);
         recipes.addShaped(EnginerTool,[[null,OreSteelPlate,null],
                                        [null,Stick,OreSteelPlate],
-                                       [Stick,null,null]);
+                                       [Stick,null,null]]);
         recipes.remove(AdvBlastFurnace);
         recipes.addShaped(AdvBlastFurnace,[[OreSteelPlate,OreSteelPlate,OreSteelPlate],
                                            [null,BlastFurnace,null],
-                                           [OreSteelPlate,OreSteelPlate,OreSteelPlate]);
+                                           [OreSteelPlate,OreSteelPlate,OreSteelPlate]]);
